@@ -13,5 +13,8 @@
     ],
     "require": {
         "doctrine/dbal": "^3.3"
+    },
+    "scripts": {
+        "serve": "php -S localhost:9000 &"
     }
 }

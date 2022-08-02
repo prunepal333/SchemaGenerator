@@ -28,14 +28,14 @@ class SchemaGenerator
 
             $columnName = Util::attributeGetArgumentValue($columnAttribute, "name") ?? $property->getName();
             $myTable->addColumn($columnName, $dbType[$property->getType()->getName()]);
-            if (Util::attributeHasArgument($columnAttribute, "primary")){
-                $primaryAttrs[] = Util::attributeGetArgumentValue($columnAttribute, "primary") ?? false;
-            }
-            if (Util::attributeHasArgument($columnAttribute, "unique")){
-                $uniqueAttrs[] = Util::attributeGetArgumentValue($columnAttribute, "unique") ?? false;
-            }
-            if (Util::attributeHasArgument($columnAttribute, "notnull")){
-            }
+            // if (Util::attributeHasArgument($columnAttribute, "primary")){
+            //     $primaryAttrs[] = Util::attributeGetArgumentValue($columnAttribute, "primary") ?? false;
+            // }
+            // if (Util::attributeHasArgument($columnAttribute, "unique")){
+            //     $uniqueAttrs[] = Util::attributeGetArgumentValue($columnAttribute, "unique") ?? false;
+            // }
+            // if (Util::attributeHasArgument($columnAttribute, "notnull")){
+            // }
             // $uniqueAttributes[] = $property->getName();
         }
         // exit;
@@ -58,7 +58,7 @@ function includeFiles($dir)
     {
         include_once $dir . DIRECTORY_SEPARATOR .  $file;
     }
-    $classes = get_declared_classes();
+    // $classes = get_declared_classes();
 }
 includeFiles(__DIR__ . DIRECTORY_SEPARATOR . "Model");
 
@@ -73,8 +73,10 @@ $dbType = array(
 
 $sg = new SchemaGenerator();
 // foreach(Util::getEntities(Model::class) as $model)
+var_dump(get_declared_classes());
 foreach(array_diff(scandir(__DIR__ . DIRECTORY_SEPARATOR . "Model/"), array('.', '..')) as $filename)
 {
+    include_once $model . ".php";
     $model = substr($filename, 0, strrpos($filename, "."));
     $sg->run("\\Ass\Model\\". $model);
 }
