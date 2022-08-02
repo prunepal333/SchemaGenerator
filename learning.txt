@@ -1,0 +1,43 @@
+DBAL consists of two layers:
+1. Driver
+2. Wrapper
+Wrapper around driver philosophy
+
+3 components: Connection, Statement, Result
+            Doctrine\DBAL\Connection wraps a Doctrine\DBAL\Driver\Connection
+            Similarly, other components are wrapped.
+
+Doctrine\DBAL\Driver\{Connection, Statement, Result} => Interfaces
+
+DBAL driver should also provide an implementation of the Doctrine\DBAL\Driver Interfaces
+
+1. Translate the DBAL connection parameters to the ones specific to the driver's connection class.
+2. Act as a factory of other driver-specific components like platform, schema manager, and exception converter.
+
+The driver components can be decorated using the four driver interfaces in order to add driver-independent functionality
+like logging or profiling. Those decorators are configured as a middleware.
+
+The DBAL is separated into several different packages that separate
+responsibilities of the different RDBMS layers.
+
+
+Middleware sits in between the wrapper components and the driver.
+
+
+Doctrine\DBAL\Driver\Middleware, it decorates the Driver component of
+either the actual driver or lower middleware.
+If necessary, the middleware might also decorate Connection, Statement
+and Result.
+
+A middleware sits in the middle between the wrapper components
+and the driver. => Decorator Design Pattern
+
+DECORATOR DESIGN PATTERN 
+ (class MyObjectClass implements MyInterface)
+ (class BaseDecorator implements MyInterface => composed of MyObjectClass ---> Delegates function calls to the MyObjectClass)
+ (class ConcreteDecorator1 extends BaseDecorator)
+    fn MyFunction(){
+        //➔ Before hook
+        $this->composedObject->MyFunction();
+        //➔ After hook
+    }

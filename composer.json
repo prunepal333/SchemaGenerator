@@ -1,0 +1,17 @@
+{
+    "name": "javra/dbal_proj",
+    "autoload": {
+        "psr-4": {
+            "Ass\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Purshottam Nepal",
+            "email": "prunepal333@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/dbal": "^3.3"
+    }
+}
